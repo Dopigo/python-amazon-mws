@@ -32,3 +32,4 @@ pip-log.txt
 .vscode/settings.json
 
 .travis.yml
+.editorconfig

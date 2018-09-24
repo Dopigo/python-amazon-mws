@@ -4,16 +4,16 @@ from setuptools import setup
 short_description = 'Python library for interacting with the Amazon MWS API'
 
 try:
-    from pypandoc import convert
-    long_description = convert("README.md", 'rst')
+    from pypandoc import convert_file
+    long_description = convert_file('README.md', 'rst')
 except (ImportError, OSError):  # either pypandoc or pandoc isn't installed
     long_description = "See README.md"
 
 setup(
     name='mws',
-    version='0.8.3',
+    version='0.8.6',
     maintainer="James Hiew",
-    download_url='https://github.com/python-amazon-mws/python-amazon-mws/archive/v0.8.3.tar.gz',
+    download_url='https://github.com/python-amazon-mws/python-amazon-mws/archive/v0.8.6.tar.gz',
     maintainer_email="james@hiew.net",
     url="http://github.com/jameshiew/mws",
     description=short_description,

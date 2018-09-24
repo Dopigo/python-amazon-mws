@@ -54,6 +54,8 @@ MARKETPLACES = {
     "CN": "https://mws.amazonservices.com.cn",  # AAHKV2X7AFYLW
     "MX": "https://mws.amazonservices.com.mx",  # A1AM78C64UM0Y8
     "TR": "https://mws.amazonservices.co.uk",  # A33AVAJ2PDY3EV
+    "AU": "https://mws.amazonservices.com.au",  # A39IBJ37TRP1C6
+    "BR": "https://mws.amazonservices.com",  # A2Q3Y263D00KWC
 }
 
 
@@ -226,7 +228,7 @@ class MWS(object):
             description=request_description,
             signature=quote(signature),
         )
-        headers = {'User-Agent': 'python-amazon-mws/0.8.3 (Language=Python)'}
+        headers = {'User-Agent': 'python-amazon-mws/0.8.6 (Language=Python)'}
         headers.update(kwargs.get('extra_headers', {}))
 
         try:

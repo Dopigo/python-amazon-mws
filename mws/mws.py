@@ -1258,6 +1258,19 @@ class InboundShipments(MWS):
         )
         return self.make_request(data, method="POST")
 
+    @utils.next_token_action('PutTransportContent')
+    def put_transport_content(self, shipment_id, carrier_name, tracking_id,
+                              is_partnered, shipment_type):
+        data = {
+            'Action': 'PutTransportContent',
+            'ShipmentId': shipment_id,
+            'IsPartnered': is_partnered,
+            'ShipmentType': shipment_type,
+            'TransportDetails.NonPartneredSmallParcelData.CarrierName': carrier_name,
+            'TransportDetails.NonPartneredSmallParcelData.PackageList.NonPartneredSmallParcelPackageInput.TrackingId': tracking_id
+        }
+        return self.make_request(data, method="POST")
+
 
 class Inventory(MWS):
     """

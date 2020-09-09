@@ -822,6 +822,11 @@ class InboundShipments(MWS):
     LABEL_PREFERENCES = ['SELLER_LABEL',
                          'AMAZON_LABEL_ONLY',
                          'AMAZON_LABEL_PREFERRED']
+    PAGE_TYPES = ['PackageLabel_Letter_2',
+                  'PackageLabel_Letter_6',
+                  'PackageLabel_A4_2',
+                  'PackageLabel_A4_4',
+                  'PackageLabel_Plain_Paper']
 
     def __init__(self, *args, **kwargs):
         """
@@ -1175,6 +1180,24 @@ class InboundShipments(MWS):
             NumberOfPackages=str(num_packages),
         )
         return self.make_request(data, method="POST")
+
+    def get_unique_package_labels(self, shipment_id, page_type, package_labels_to_print):
+        if not isinstance(package_labels_to_print, list):
+            raise MWSError("package_labels_to_print has to be a list.")
+
+        if not page_type in self.PAGE_TYPES:
+            raise MWSError("Undefined page type.")
+
+        data = {
+            'Action': 'GetUniquePackageLabels',
+            'ShipmentId': shipment_id,
+            'PageType': page_type,
+        }
+
+        data.update(utils.enumerate_params({
+            'PackageLabelsToPrint.member.': package_labels_to_print,
+        }))
+        return self.make_request(data, method="GET")
 
     def get_transport_content(self, shipment_id):
         """
